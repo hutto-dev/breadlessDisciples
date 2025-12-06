@@ -25,7 +25,7 @@ body {
   background-image: url("./images/home.svg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+
   z-index: -1;
   pointer-events: none;
 }
