@@ -9,13 +9,13 @@
   font-family: "TheYoungestSerif";
 }
 
-.container {
+body {
   background-image: url("./images/home.svg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   height: 100vh;
-  width: 100vw;
 }
 
 header {
