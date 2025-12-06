@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "TheYoungestSerif";
+  src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "TheYoungestSerif";
+}
+
+.container {
+  background-image: url("./images/home.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 2em 0em 2em;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid black;
+  width: 92%;
+  margin: 0 auto;
+  min-height: calc(100vh - 15em);
+}
+
+.scripture-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  text-align: center;
+  font-size: 1.225rem;
+  gap: 1em;
+}
+
+.scripture-verse {
+}
+
+.scripture-ref {
+}
+
+.btn-more {
+  padding: 0.5em 2.5em;
+  border-radius: 100px;
+  letter-spacing: 5px;
+}
