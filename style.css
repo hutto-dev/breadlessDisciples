@@ -11,12 +11,23 @@
 
 html,
 body {
-  height: 100%;
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh; /* 'small viewport height', works on iOS for notch */
   background-image: url("./images/home.svg");
-  background-size: cover; /* stretch to cover entire viewport */
-  background-position: center; /* center the image */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
+  z-index: -1;
+  pointer-events: none;
 }
 
 header {
