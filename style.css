@@ -9,18 +9,14 @@
   font-family: "TheYoungestSerif";
 }
 
-.background {
-  position: fixed; /* stay in place when scrolling */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+html,
+body {
+  height: 100%;
+  margin: 0;
   background-image: url("./images/home.svg");
-  background-size: cover; /* stretch to cover entire area */
+  background-size: cover; /* stretch to cover entire viewport */
   background-position: center; /* center the image */
   background-repeat: no-repeat;
-  z-index: -1; /* behind all content */
-  pointer-events: none; /* clicks pass through */
 }
 
 header {
