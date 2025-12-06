@@ -9,37 +9,19 @@
   font-family: "TheYoungestSerif";
 }
 
-body {
-  position: fixed;
+.background {
+  position: fixed; /* stay in place when scrolling */
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
-  width: 100%;
-  height: 100dvh;
-  background-image: url("./images/home.svg");
-
-  background-size: cover;
-
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* .background {
-  position: fixed;
-  top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100dvh;
   background-image: url("./images/home.svg");
-  background-position: center;
-  background-size: cover;
+  background-size: cover; /* stretch to cover entire area */
+  background-position: center; /* center the image */
   background-repeat: no-repeat;
-  z-index: -1;
-  pointer-events: none;
-} */
+  z-index: -1; /* behind all content */
+  pointer-events: none; /* clicks pass through */
+}
 
 header {
   display: flex;
@@ -54,7 +36,7 @@ main {
   border-top: 1px solid black;
   width: 92%;
   margin: 0 auto;
-  min-height: calc(100vh - 15em);
+  min-height: 75vh;
 }
 
 .scripture-container {
