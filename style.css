@@ -3,7 +3,7 @@
   src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
 }
 
-/* UNIVERSAL RESET
+/* RESET */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -18,17 +18,22 @@ body {
   overflow-x: hidden;
 }
 
-/* FULL-BLEED BACKGROUND LAYER */
-/* body {
+/* REQUIRED — DO NOT REMOVE */
+body {
   position: relative;
   background: transparent;
 }
 
+/* FULL-BLEED BACKGROUND LAYER */
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: calc(0 - env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  bottom: calc(0 - env(safe-area-inset-bottom));
 
+  /* For now: debug color. After it works, switch to your PNG */
   background-image: url("./images/home.png");
   background-size: cover;
   background-position: center;
@@ -36,67 +41,24 @@ body::before {
 
   z-index: -1;
   pointer-events: none;
-
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-} */
-
-/* header,
-main,
-footer {
-  max-height: 100%;
-} */
-
-/* reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  font-family: "TheYoungestSerif";
-}
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
 }
 
-/* body pseudo-layer full bleed (debug mode) */
-body::before {
-  content: "";
-  position: fixed;
-  /* inset 0 to fill viewport; we then push it outward with the safe-area calc */
-  top: calc(0 - env(safe-area-inset-top));
-  left: 0;
-  right: 0;
-  bottom: calc(0 - env(safe-area-inset-bottom));
-
-  /* DEBUG: bright color to make it obvious — change to your image once test passes */
-  background: magenta;
-  z-index: -9999;
-  pointer-events: none;
-}
-
-/* make sure nothing has an opaque bg covering it */
 header,
 main,
 footer {
   background: transparent !important;
 }
 
-/* COMBINED MAIN BLOCK (crucial!) */
+/* MAIN */
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 92%;
   margin: 0 auto;
-
   border-top: 1px solid black;
 
-  /* TEMPORARY TEST TO PREVENT SCROLL */
-  height: calc(100vh - 6em);
-  overflow: hidden;
+  min-height: calc(100vh - 6em);
 }
 
 .scripture-container {
