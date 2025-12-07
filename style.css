@@ -3,6 +3,7 @@
   src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
 }
 
+/* FROM CHAT GPT FOR FULL BLEED BACKGROUND */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -13,26 +14,40 @@ html,
 body {
   height: 100%;
   margin: 0;
-  padding: 0;
-  background-color: black;
 }
 
-html {
+/* FULL-BLEED BACKGROUND LAYER */
+body {
+  position: relative;
+  background: transparent;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* Your background image */
   background-image: url("./images/home.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* optional: ensure it visually reaches the safe area */
+
+  /* Always behind your content */
+  z-index: -1;
+  pointer-events: none;
+
+  /* Makes it extend INTO the notch and bottom bar */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-body {
-  background: transparent;
-}
+/* FROM CHAT GPT FOR FULL BLEED BACKGROUND */
 
 header {
-  background: transparent;
   display: flex;
   justify-content: space-between;
   padding: 2em 2em 0em 2em;
