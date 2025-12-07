@@ -9,14 +9,20 @@
   font-family: "TheYoungestSerif";
 }
 
-body {
+html {
+  /* allow background to reach behind notch/home bar */
+  height: 100%;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+
   background-image: url("./images/home.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: none;
+}
+
+body {
+  height: 100%;
 }
 
 header {
