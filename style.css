@@ -3,7 +3,7 @@
   src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
 }
 
-/* UNIVERSAL RESET */
+/* UNIVERSAL RESET
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,7 +19,7 @@ body {
 }
 
 /* FULL-BLEED BACKGROUND LAYER */
-body {
+/* body {
   position: relative;
   background: transparent;
 }
@@ -39,12 +39,48 @@ body::before {
 
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
-}
+} */
 
-header,
+/* header,
 main,
 footer {
   max-height: 100%;
+} */
+
+/* reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "TheYoungestSerif";
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* body pseudo-layer full bleed (debug mode) */
+body::before {
+  content: "";
+  position: fixed;
+  /* inset 0 to fill viewport; we then push it outward with the safe-area calc */
+  top: calc(0 - env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  bottom: calc(0 - env(safe-area-inset-bottom));
+
+  /* DEBUG: bright color to make it obvious — change to your image once test passes */
+  background: magenta;
+  z-index: -9999;
+  pointer-events: none;
+}
+
+/* make sure nothing has an opaque bg covering it */
+header,
+main,
+footer {
+  background: transparent !important;
 }
 
 /* COMBINED MAIN BLOCK (crucial!) */
