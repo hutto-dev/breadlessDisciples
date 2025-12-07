@@ -3,37 +3,44 @@
   src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
 }
 
-/* RESET */
+/* RESET — Clean and universal */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
 html,
 body {
   height: 100%;
-  padding: 0;
-  margin: 0;
+  width: 100%;
   overflow-x: hidden;
-}
-
-body {
-  position: relative;
-  background: transparent;
   font-family: "TheYoungestSerif";
 }
 
-/* THIS IS THE MAGIC — FULL BLEED FIXED BACKGROUND */
+/* BODY SETUP — Transparent for the background layer */
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: -webkit-fill-available; /* iOS magic for full height behind bars */
+  background: transparent;
+}
+
+/* FULL-BLEED BACKGROUND — Extends behind status bar, notch, and home indicator */
 body::before {
   content: "";
-  position: fixed; /* not absolute! */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* height: 100dvh; also works if you prefer */
+  /* Force full extension into safe areas (iPhone 17 tested) */
+  top: -env(safe-area-inset-top); /* Pushes up behind the top bar/notch */
+  bottom: -env(safe-area-inset-bottom); /* Pushes down behind the home bar */
+  left: -env(safe-area-inset-left); /* Sides for landscape/rounded corners */
+  right: -env(safe-area-inset-right);
 
   background-image: url("./images/home.png");
   background-size: cover;
@@ -42,21 +49,25 @@ body::before {
 
   z-index: -1;
   pointer-events: none;
-
-  /* This is the key line most people miss */
-  inset: 0; /* same as top/right/bottom/left: 0 */
 }
 
-/* Make sure nothing accidentally has a background */
+/* Ensure no elements paint over the background */
 header,
 main,
 footer,
-div {
-  background: transparent;
+.scripture-container,
+.btn-more {
+  background: transparent !important;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 2em 0 2em;
+}
+
+/* MAIN CONTENT — Stays in safe area, scrolls normally */
 main {
-  min-height: 100vh; /* or 100dvh if you want dynamic viewport */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,16 +75,22 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2em 0;
+  /* Add safe padding for content only (not background) */
+  padding-top: env(
+    safe-area-inset-top
+  ); /* Space above content for status bar */
+  padding-bottom: env(safe-area-inset-bottom); /* Space below for home bar */
   border-top: 1px solid black;
+  min-height: calc(100vh - 4em); /* Adjust for your header/footer */
 }
 
 .scripture-container {
-  width: 80%;
-  text-align: center;
-  font-size: 1.225rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
+  text-align: center;
+  font-size: 1.225rem;
   gap: 1em;
 }
 
