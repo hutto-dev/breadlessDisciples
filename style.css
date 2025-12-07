@@ -1,4 +1,45 @@
-@font-face {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "TheYoungestSerif", serif;
+  background: transparent;
+}
+
+/* ←←← THIS IS THE ONLY BACKGROUND CODE YOU NEED →→→ */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50px; /* overshoot top */
+  left: 0;
+  right: 0;
+  bottom: -50px; /* overshoot bottom */
+  background: url("./images/home.png") center/cover no-repeat;
+  z-index: -1;
+}
+
+/* your page content */
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8vh 5% 10vh;
+  text-align: center;
+}
+
+/* @font-face {
   font-family: "TheYoungestSerif";
   src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
 }
@@ -20,20 +61,20 @@ body {
   font-family: "TheYoungestSerif", serif;
 }
 
-/* THIS IS THE ONLY PART THAT MATTERS FOR THE BACKGROUND */
+
 body::before {
   content: "";
   position: fixed;
   inset: -100vh; /* magic line – extends way beyond safe areas */
-  width: 100vw;
+/* width: 100vw;
   height: 100vh;
   height: 100dvh; /* 2025 gold standard */
-  background: url("./images/home.png") center/cover no-repeat;
+/* background: url("./images/home.png") center/cover no-repeat;
   z-index: -1;
   pointer-events: none;
-}
+} */
 
-header {
+/* header {
   display: flex;
   justify-content: space-between;
   padding: 2em 2em 0 2em;
@@ -61,7 +102,7 @@ main {
   border-radius: 50px;
   background: white;
   letter-spacing: 4px;
-}
+} */
 
 /* MAIN CONTENT — Stays in safe area, scrolls normally */
 /* main {
