@@ -3,7 +3,7 @@
   src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
 }
 
-/* FROM CHAT GPT FOR FULL BLEED BACKGROUND */
+/* UNIVERSAL RESET */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,8 +12,10 @@
 
 html,
 body {
-  height: 100%;
+  padding: 0;
   margin: 0;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 /* FULL-BLEED BACKGROUND LAYER */
@@ -25,42 +27,40 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
 
-  /* Your background image */
   background-image: url("./images/home.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  /* Always behind your content */
   z-index: -1;
   pointer-events: none;
 
-  /* Makes it extend INTO the notch and bottom bar */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* FROM CHAT GPT FOR FULL BLEED BACKGROUND */
-
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 2em 2em 0em 2em;
+header,
+main,
+footer {
+  max-height: 100%;
 }
 
+/* COMBINED MAIN BLOCK (crucial!) */
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 1px solid black;
+
   width: 92%;
   margin: 0 auto;
-  min-height: 75vh;
+
+  border-top: 1px solid black;
+
+  /* TEMPORARY TEST TO PREVENT SCROLL */
+  height: calc(100vh - 6em);
+  overflow: hidden;
 }
 
 .scripture-container {
@@ -71,12 +71,6 @@ main {
   text-align: center;
   font-size: 1.225rem;
   gap: 1em;
-}
-
-.scripture-verse {
-}
-
-.scripture-ref {
 }
 
 .btn-more {
