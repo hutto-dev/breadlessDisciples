@@ -9,23 +9,30 @@
   font-family: "TheYoungestSerif";
 }
 
-html {
-  /* allow background to reach behind notch/home bar */
+html,
+body {
   height: 100%;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
 
+html {
   background-image: url("./images/home.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* optional: ensure it visually reaches the safe area */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 body {
-  height: 100%;
+  background: transparent;
 }
 
 header {
+  background: transparent;
   display: flex;
   justify-content: space-between;
   padding: 2em 2em 0em 2em;
