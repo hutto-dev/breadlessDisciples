@@ -3,182 +3,49 @@
   src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
 }
 
-/* Global reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
-  /* Direct background on html = bleeds behind safe areas/notch/home bar */
+body {
   background-image: url("./images/home.png");
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
-
-  /* iOS fix: scroll instead of fixed to avoid viewport recalc bugs */
-  @supports (-webkit-touch-callout: none) {
-    background-attachment: scroll;
-  }
-
-  height: 100svh; /* Small viewport height = handles dynamic bars perfectly */
-  width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  font-family: "TheYoungestSerif", serif;
-  min-height: 100svh;
-  background: transparent; /* Let html background shine through */
-  padding-top: env(safe-area-inset-top); /* Content space for top bar/notch */
-  padding-bottom: env(safe-area-inset-bottom); /* Content space for home bar */
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-}
-
-/* Your content styles */
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 92%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2em 0;
-  border-top: 1px solid black;
-  text-align: center;
-  min-height: calc(
-    100svh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
-  );
-}
-
-.scripture-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-  font-size: 1.225rem;
-  gap: 1em;
-}
-
-.btn-more {
-  padding: 0.5em 2.5em;
-  border-radius: 100px;
-  border: 1px solid black;
-  letter-spacing: 5px;
-  background: white;
-  color: black;
-  cursor: pointer;
-}
-
-header,
-main,
-footer,
-body > * {
-  background: transparent !important;
+  z-index: -1;
+  pointer-events: none;
+  font-family: "TheYoungestSerif";
 }
 
 header {
-  padding-top: env(
-    safe-area-inset-top
-  ); /* pushes your “breadless disciples” text down from the clock */
-  padding-left: 5%;
-  padding-right: 1em 5% 0;
-  text-align: left;
-}
-
-/* @font-face {
-  font-family: "TheYoungestSerif";
-  src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-  background: transparent;
-  font-family: "TheYoungestSerif", serif;
-}
-
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: -100vh; /* magic line – extends way beyond safe areas */
-/* width: 100vw;
-  height: 100vh;
-  height: 100dvh; /* 2025 gold standard */
-/* background: url("./images/home.png") center/cover no-repeat;
-  z-index: -1;
-  pointer-events: none;
-} */
-
-/* header {
   display: flex;
   justify-content: space-between;
   padding: 2em 2em 0 2em;
 }
 
 main {
-  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: env(safe-area-inset-top) 5% env(safe-area-inset-bottom);
+  width: 92%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2em 0;
+  border-top: 1px solid black;
   text-align: center;
-  gap: 2rem;
 }
 
 .scripture-container {
-  font-size: 1.3rem;
-  line-height: 1.5;
-}
-
-.btn-more {
-  padding: 0.7em 3em;
-  border: 1px solid black;
-  border-radius: 50px;
-  background: white;
-  letter-spacing: 4px;
-} */
-
-/* MAIN CONTENT — Stays in safe area, scrolls normally */
-/* main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 92%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2em 0;
-  /* Add safe padding for content only (not background) */
-/* padding-top: env(
-    safe-area-inset-top
-  ); /* Space above content for status bar */
-/* padding-bottom: env(safe-area-inset-bottom); Space below for home bar
-  border-top: 1px solid black;
-  min-height: calc(100vh - 4em); /* Adjust for your header/footer */
-/* }  */
-
-/* .scripture-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80%;
+  margin-top: -10rem;
   text-align: center;
   font-size: 1.225rem;
+  font-weight: 500;
   gap: 1em;
 }
 
@@ -190,4 +57,4 @@ main {
   background: white;
   color: black;
   cursor: pointer;
-} */
+}
