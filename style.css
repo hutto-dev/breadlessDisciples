@@ -1,3 +1,5 @@
+/****************** UNIVERSAL STYLES ******************/
+
 @font-face {
   font-family: "TheYoungestSerif";
   src: url("fonts/the-youngest-serif-display.ttf") format("truetype");
@@ -16,7 +18,8 @@ body {
   background-repeat: no-repeat;
   z-index: -1;
   pointer-events: none;
-  font-family: "TheYoungestSerif";
+  /* font-family: "TheYoungestSerif"; */
+  font-family: "Noto Serif Display";
 }
 
 header {
@@ -25,7 +28,63 @@ header {
   padding: 2em 2em 0 2em;
 }
 
-main {
+/****************** HOME STYLES ******************/
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 2em 0 2em;
+  visibility: hidden;
+}
+
+.main-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 92%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2em 0;
+  text-align: center;
+  font-family: "TheYoungestSerif";
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin-top: -15rem;
+  text-align: center;
+  font-size: 1.225rem;
+  font-weight: 300;
+}
+
+.title {
+  font-style: italic;
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.bread-verse {
+  font-size: 0.6rem;
+}
+
+.btn-topics {
+  padding: 0.5em 2.5em;
+  border-radius: 100px;
+  border: 1px solid black;
+  letter-spacing: 5px;
+  background: white;
+  color: black;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/****************** SCRIPTURE STYLES ******************/
+
+.main-scripture {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,6 +95,7 @@ main {
   padding: 2em 0;
   border-top: 1px solid black;
   text-align: center;
+  font-family: "TheYoungestSerif";
 }
 
 .scripture-container {
@@ -46,7 +106,7 @@ main {
   margin-top: -10rem;
   text-align: center;
   font-size: 1.225rem;
-  font-weight: 500;
+  font-weight: 300;
   gap: 1em;
 }
 
