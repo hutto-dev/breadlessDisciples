@@ -82,6 +82,47 @@ header {
   margin-top: 1rem;
 }
 
+/****************** MENU STYLES ******************/
+
+header {
+  visibility: visible;
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 92%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2em 0;
+  border-top: 1px solid black;
+  text-align: center;
+  font-family: "TheYoungestSerif";
+}
+
+.topic-container {
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+  grid-row: 1 / -1;
+}
+
+.topic {
+  background-color: white;
+  border: 1px solid black;
+  padding: 0.25em 1em;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
 /****************** SCRIPTURE STYLES ******************/
 
 .main-scripture {
