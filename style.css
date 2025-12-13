@@ -30,10 +30,7 @@ header {
 
 /****************** HOME STYLES ******************/
 
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 2em 2em 0 2em;
+.header-home {
   visibility: hidden;
 }
 
@@ -88,13 +85,17 @@ header {
   visibility: visible;
 }
 
+h1 {
+  font-style: italic;
+}
+
 .main-menu {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 92%;
-  min-height: 100vh;
+  min-height: calc(100vh - 300px);
   margin: 0 auto;
   padding: 2em 0;
   border-top: 1px solid black;
@@ -103,21 +104,20 @@ header {
 }
 
 .topic-container {
-  display: grid;
-  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  width: 80%;
 }
 
 ul {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   list-style: none;
   gap: 0.5rem;
-  grid-row: 1 / -1;
 }
 
 .topic {
   background-color: white;
   border: 1px solid black;
-  padding: 0.25em 1em;
+  padding: 0.5em 2em;
   border-radius: 100px;
   cursor: pointer;
   font-size: 0.75rem;
