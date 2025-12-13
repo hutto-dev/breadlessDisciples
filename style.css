@@ -17,7 +17,6 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -1;
-  pointer-events: none;
   /* font-family: "TheYoungestSerif"; */
   font-family: "Noto Serif Display";
 }
@@ -77,6 +76,10 @@ header {
   color: black;
   cursor: pointer;
   margin-top: 1rem;
+}
+
+a {
+  text-decoration: none;
 }
 
 /****************** MENU STYLES ******************/
