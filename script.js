@@ -20,15 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // SCRIPTURE
   if (document.body.classList.contains("page-scripture")) {
+    // Search after the ? in the url
     const params = new URLSearchParams(window.location.search);
     const topic = params.get("topic");
-    console.log(topic);
 
-    const headerMenu = document.getElementById("header-menu");
-    headerMenu.textContent = topic;
-
-    // grab the search params
-    // assign the topic from the params
-    //
+    const scriptureTitle = document.getElementById("scripture-title");
+    scriptureTitle.textContent = topic;
   }
 });
