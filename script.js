@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // MENU
+
   if (document.body.classList.contains("page-menu")) {
     const topics = document.querySelectorAll(".topic");
 
@@ -19,5 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // SCRIPTURE
   if (document.body.classList.contains("page-scripture")) {
+    const params = new URLSearchParams(window.location.search);
+    const topic = params.get("topic");
+    console.log(topic);
+
+    const headerMenu = document.getElementById("header-menu");
+    headerMenu.textContent = topic;
+
+    // grab the search params
+    // assign the topic from the params
+    //
   }
 });
