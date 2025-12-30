@@ -119,6 +119,34 @@ const scriptures = [
   },
 ];
 
+// API LOGIC
+
+// king james id = 'de4e12af7f28f599-02'
+// king james dblId = 'de4e12af7f28f599'
+// contemporary english versions id = '555fef9a6cb31151-01'
+// american standard id = '06125adad2d5898a-01'
+
+// "https://rest.api.bible/v1/bibles/06125adad2d5898a-01/verses/PSA.119.30?content-type=text"
+
+async function getScripture() {
+  const apiKey = "RtBn4DEljTrIU0VBsqsx-";
+
+  const response = await fetch(
+    "https://rest.api.bible/v1/bibles/06125adad2d5898a-01/verses/PSA.119.32?content-type=text",
+    {
+      headers: {
+        "api-key": apiKey,
+      },
+    }
+  );
+
+  const data = await response.json();
+  console.log(data);
+
+  console.log(data.data.content);
+}
+getScripture();
+
 // LOGIC
 
 document.addEventListener("DOMContentLoaded", () => {
