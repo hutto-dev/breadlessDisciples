@@ -1,124 +1,3 @@
-// SCRIPTURES BEFORE API
-
-const scriptures = [
-  {
-    topic: "anxiety",
-    verses: [
-      {
-        verse:
-          "Do not be anxious about anything, but in everything, by prayer and petition, with thanksgiving, present your requests to God.",
-        ref: "Philippians 4:6",
-      },
-      {
-        verse: "Cast all your anxiety on Him because He cares for you.",
-        ref: "1 Peter 5:7",
-      },
-      {
-        verse:
-          "An anxious heart weighs a man down, but a kind word cheers him up.",
-        ref: "Proverbs 12:25",
-      },
-    ],
-  },
-  {
-    topic: "joy",
-    verses: [
-      {
-        verse:
-          "You shall go out with joy and be led forth with peace; the mountains and hills with break forth before you into singing, and all the trees of the fields shall clap their hands.",
-        ref: "Isaiah 55:12",
-      },
-      {
-        verse: "...Do not grieve, for the joy of the Lord is your strength.",
-        ref: "Nehemiah 8:10",
-      },
-      {
-        verse:
-          "Your statutes are my heritage forever; they are the joy of my heart.",
-        ref: "Psalm 119:111",
-      },
-    ],
-  },
-  {
-    topic: "love",
-    verses: [
-      {
-        verse:
-          "In all their distress He too was distressed, and the angel of His presence saved them. In His love and mercy He redeemed them; He lifted them up and carried them all the days of old.",
-        ref: "Isaiah 63:9",
-      },
-      {
-        verse:
-          "How great is the love the Father has lavished on us, that we should be called children of God! And that is what we are! The reason the world does not know us is that it did not know him.",
-        ref: "1 John 3:1",
-      },
-      {
-        verse:
-          "There is no fear in love. But perfect love drives out fear, because fear has to do with punishment. The one who fears is not made perfect in love.",
-        ref: "1 John 4:18",
-      },
-    ],
-  },
-  {
-    topic: "peace",
-    verses: [
-      {
-        verse: "For He Himself is our peace...",
-        ref: "Ephesians 2:14",
-      },
-      {
-        verse:
-          "And the peace of God, which transcends all understanding, will guard you hearts and your minds in Christ Jesus.",
-        ref: "Philippians 4:7",
-      },
-      {
-        verse:
-          "You will keep in perfect peace him whose mind is steadfast, because he trusts in You.",
-        ref: "Isaiah 26:3",
-      },
-    ],
-  },
-  {
-    topic: "strength",
-    verses: [
-      {
-        verse:
-          "The Lord is the strength of his people, a fortress of salvation for His anointed one.",
-        ref: "Psalm 28:8",
-      },
-      {
-        verse:
-          "God is our refuge and strength, an ever-present help in trouble.",
-        ref: "Psalm 46:1",
-      },
-      {
-        verse: "It is God who arms me with strength and makes my way perfect.",
-        ref: "2 Samuel 22:33",
-      },
-    ],
-  },
-  {
-    topic: "stronghold",
-    verses: [
-      {
-        verse:
-          "The Lord is good, a stronghold in the day of trouble; and he knows them that trust Him",
-        ref: "Nahum 1:7",
-      },
-      {
-        verse:
-          "The weapons we fight with are not the weapons of the world. On the contrary, they have divine power to demolish strongholds. We demolish arguments and every pretension that sets itself up against the knowledge of God, and we lead every thought and purpose away captive into the obedience of Christ.",
-        ref: "2 Corinthians 10:4-5",
-      },
-      {
-        verse:
-          "The Lord also will be a refuge (stronghold) for the oppressed, a refuge in times of trouble.",
-        ref: "Psalm 9:9",
-      },
-    ],
-  },
-];
-
 // LOGIC
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -150,20 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const scriptureTitle = document.getElementById("scripture-title");
     scriptureTitle.textContent = topic;
 
-    ///////////////////////////////////////////// API LOGIC - NEW /////////////////////////////////////////////
-
-    // 1. create async function to grab all verses
-    // 2. assign variables to api and bible id
-    // 3. set the offset, limit, and total numbers
-    // 4. create all verse empty []
-    // 5. do/while function
-    // 7. do...fetch this api within these limits (url, then do the reponse and url and headers, then do the data.response thing
-    // 8. concat to allVerse
-    // 9. add to to total // total = data.data.total;
-    // 10. increase offset for next batch by 200 (limit)
-    // 11. while ( allVerses.length < total)
-    // 12. console log all this stuff you've done? allVerses.length
-
     ////////////////////////////// API ///////////////////////////////////////
     let allVerses = [];
     async function fetchAllVerses(topic) {
@@ -177,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       allVerses = [];
 
       do {
-        const url = `https://rest.api.bible/v1/bibles/${bibleId}/search?query=${topic}&offset=${offset}&limit=${limit}`;
+        const url = `https://rest.api.bible/v1/bibles/${bibleId}/search?query=${topic}&offset=${offset}&limit=${limit}&fuzziness=0`;
         const urlBibleId = `https://rest.api.bible/v1/bibles`;
 
         const response = await fetch(url, {
@@ -187,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const data = await response.json();
+        console.log(data);
 
         allVerses = allVerses.concat(data.data.verses);
         total = data.data.total;
@@ -195,6 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     ////////////////////////////// GETTING RANDOM VERSE ///////////////////////////////////////
+
+    const verse = document.getElementById("scripture-verse");
+    const ref = document.getElementById("scripture-ref");
 
     async function getRandomVerse() {
       const randomNumber = Math.floor(Math.random() * allVerses.length);
@@ -208,49 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     run();
-
-    //     console.log(data.data.verses.length);
-    //     verse.textContent = data.data.verses[randomNumber].text;
-    //     ref.textContent = data.data.verses[randomNumber].reference;
-    //   }
-
-    // }
-
-    ////////////////////////////// WORKING BUT ONLY 200 AND NOT GOOD CODE ///////////////////////////////////////
-
-    const verse = document.getElementById("scripture-verse");
-    const ref = document.getElementById("scripture-ref");
-
-    // function getScripture(topic) {
-    //   // API LOGIC
-
-    //   async function getScriptureAPI() {
-    //     const apiKey = "RtBn4DEljTrIU0VBsqsx-";
-
-    //     const response = await fetch(
-    //       `https://rest.api.bible/v1/bibles/65eec8e0b60e656b-01/search?query=${topic}&limit=500`,
-    //       {
-    //         headers: {
-    //           "api-key": apiKey,
-    //         },
-    //       }
-    //     );
-
-    //     const data = await response.json();
-    //     console.log(data);
-    //     console.log(data.data.verses[0].text);
-
-    //     const randomNumber = Math.floor(
-    //       Math.random() * data.data.verses.length
-    //     );
-    //     console.log(data.data.verses.length);
-    //     verse.textContent = data.data.verses[randomNumber].text;
-    //     ref.textContent = data.data.verses[randomNumber].reference;
-    //   }
-    //   getScriptureAPI();
-    // }
-
-    // getScripture(topic);
 
     ///////////////////////////////////////////// MORE BUTTON /////////////////////////////////////////////
 
@@ -280,3 +106,171 @@ document.addEventListener("DOMContentLoaded", () => {
 // american standard id = '06125adad2d5898a-01'
 
 // "https://rest.api.bible/v1/bibles/06125adad2d5898a-01/verses/PSA.119.30?content-type=text"
+
+///////////////////////////////////////////// API LOGIC - THOUGHTS /////////////////////////////////////////////
+
+// 1. create async function to grab all verses
+// 2. assign variables to api and bible id
+// 3. set the offset, limit, and total numbers
+// 4. create all verse empty []
+// 5. do/while function
+// 7. do...fetch this api within these limits (url, then do the reponse and url and headers, then do the data.response thing
+// 8. concat to allVerse
+// 9. add to to total // total = data.data.total;
+// 10. increase offset for next batch by 200 (limit)
+// 11. while ( allVerses.length < total)
+// 12. console log all this stuff you've done? allVerses.length
+
+////////////////////////////// WORKING BUT ONLY 200 AND NOT GOOD CODE ///////////////////////////////////////
+
+// function getScripture(topic) {
+//   // API LOGIC
+
+//   async function getScriptureAPI() {
+//     const apiKey = "RtBn4DEljTrIU0VBsqsx-";
+
+//     const response = await fetch(
+//       `https://rest.api.bible/v1/bibles/65eec8e0b60e656b-01/search?query=${topic}&limit=500`,
+//       {
+//         headers: {
+//           "api-key": apiKey,
+//         },
+//       }
+//     );
+
+//     const data = await response.json();
+//     console.log(data);
+//     console.log(data.data.verses[0].text);
+
+//     const randomNumber = Math.floor(
+//       Math.random() * data.data.verses.length
+//     );
+//     console.log(data.data.verses.length);
+//     verse.textContent = data.data.verses[randomNumber].text;
+//     ref.textContent = data.data.verses[randomNumber].reference;
+//   }
+//   getScriptureAPI();
+// }
+
+// getScripture(topic);
+
+/////////////////////////////////// SCRIPTURES BEFORE API  ///////////////////////////////////
+
+// const scriptures = [
+//   {
+//     topic: "anxiety",
+//     verses: [
+//       {
+//         verse:
+//           "Do not be anxious about anything, but in everything, by prayer and petition, with thanksgiving, present your requests to God.",
+//         ref: "Philippians 4:6",
+//       },
+//       {
+//         verse: "Cast all your anxiety on Him because He cares for you.",
+//         ref: "1 Peter 5:7",
+//       },
+//       {
+//         verse:
+//           "An anxious heart weighs a man down, but a kind word cheers him up.",
+//         ref: "Proverbs 12:25",
+//       },
+//     ],
+//   },
+//   {
+//     topic: "joy",
+//     verses: [
+//       {
+//         verse:
+//           "You shall go out with joy and be led forth with peace; the mountains and hills with break forth before you into singing, and all the trees of the fields shall clap their hands.",
+//         ref: "Isaiah 55:12",
+//       },
+//       {
+//         verse: "...Do not grieve, for the joy of the Lord is your strength.",
+//         ref: "Nehemiah 8:10",
+//       },
+//       {
+//         verse:
+//           "Your statutes are my heritage forever; they are the joy of my heart.",
+//         ref: "Psalm 119:111",
+//       },
+//     ],
+//   },
+//   {
+//     topic: "love",
+//     verses: [
+//       {
+//         verse:
+//           "In all their distress He too was distressed, and the angel of His presence saved them. In His love and mercy He redeemed them; He lifted them up and carried them all the days of old.",
+//         ref: "Isaiah 63:9",
+//       },
+//       {
+//         verse:
+//           "How great is the love the Father has lavished on us, that we should be called children of God! And that is what we are! The reason the world does not know us is that it did not know him.",
+//         ref: "1 John 3:1",
+//       },
+//       {
+//         verse:
+//           "There is no fear in love. But perfect love drives out fear, because fear has to do with punishment. The one who fears is not made perfect in love.",
+//         ref: "1 John 4:18",
+//       },
+//     ],
+//   },
+//   {
+//     topic: "peace",
+//     verses: [
+//       {
+//         verse: "For He Himself is our peace...",
+//         ref: "Ephesians 2:14",
+//       },
+//       {
+//         verse:
+//           "And the peace of God, which transcends all understanding, will guard you hearts and your minds in Christ Jesus.",
+//         ref: "Philippians 4:7",
+//       },
+//       {
+//         verse:
+//           "You will keep in perfect peace him whose mind is steadfast, because he trusts in You.",
+//         ref: "Isaiah 26:3",
+//       },
+//     ],
+//   },
+//   {
+//     topic: "strength",
+//     verses: [
+//       {
+//         verse:
+//           "The Lord is the strength of his people, a fortress of salvation for His anointed one.",
+//         ref: "Psalm 28:8",
+//       },
+//       {
+//         verse:
+//           "God is our refuge and strength, an ever-present help in trouble.",
+//         ref: "Psalm 46:1",
+//       },
+//       {
+//         verse: "It is God who arms me with strength and makes my way perfect.",
+//         ref: "2 Samuel 22:33",
+//       },
+//     ],
+//   },
+//   {
+//     topic: "stronghold",
+//     verses: [
+//       {
+//         verse:
+//           "The Lord is good, a stronghold in the day of trouble; and he knows them that trust Him",
+//         ref: "Nahum 1:7",
+//       },
+//       {
+//         verse:
+//           "The weapons we fight with are not the weapons of the world. On the contrary, they have divine power to demolish strongholds. We demolish arguments and every pretension that sets itself up against the knowledge of God, and we lead every thought and purpose away captive into the obedience of Christ.",
+//         ref: "2 Corinthians 10:4-5",
+//       },
+//       {
+//         verse:
+//           "The Lord also will be a refuge (stronghold) for the oppressed, a refuge in times of trouble.",
+//         ref: "Psalm 9:9",
+//       },
+//     ],
+//   },
+// ];
