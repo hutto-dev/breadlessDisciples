@@ -122,7 +122,7 @@ const scriptures = [
 // LOGIC
 
 document.addEventListener("DOMContentLoaded", () => {
-  // MENU
+  ///////////////////////////////////////////// MENU PAGE /////////////////////////////////////////////
 
   if (document.body.classList.contains("page-menu")) {
     const topics = document.querySelectorAll(".topic");
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // assign the topic id to the windows thing
   }
 
-  // SCRIPTURE
+  ///////////////////////////////////////////// SCRIPTURE PAGE /////////////////////////////////////////////
   if (document.body.classList.contains("page-scripture")) {
     // Search after the ? in the url
     const params = new URLSearchParams(window.location.search);
@@ -150,71 +150,119 @@ document.addEventListener("DOMContentLoaded", () => {
     const scriptureTitle = document.getElementById("scripture-title");
     scriptureTitle.textContent = topic;
 
-    // // API LOGIC
+    ///////////////////////////////////////////// API LOGIC - NEW /////////////////////////////////////////////
 
-    // async function getScriptureAPI() {
-    //   const apiKey = "RtBn4DEljTrIU0VBsqsx-";
+    // 1. create async function to grab all verses
+    // 2. assign variables to api and bible id
+    // 3. set the offset, limit, and total numbers
+    // 4. create all verse empty []
+    // 5. do/while function
+    // 7. do...fetch this api within these limits (url, then do the reponse and url and headers, then do the data.response thing
+    // 8. concat to allVerse
+    // 9. add to to total // total = data.data.total;
+    // 10. increase offset for next batch by 200 (limit)
+    // 11. while ( allVerses.length < total)
+    // 12. console log all this stuff you've done? allVerses.length
 
-    //   const response = await fetch(
-    //     `https://rest.api.bible/v1/bibles/06125adad2d5898a-01/search?query=${topic}`,
-    //     {
-    //       headers: {
-    //         "api-key": apiKey,
-    //       },
-    //     }
-    //   );
+    ////////////////////////////// API ///////////////////////////////////////
+    let allVerses = [];
+    async function fetchAllVerses(topic) {
+      const apiKey = "RtBn4DEljTrIU0VBsqsx-";
+      const bibleId = "65eec8e0b60e656b-01";
 
-    //   const data = await response.json();
-    //   console.log(data);
-    //   console.log(data.data.verses[0].text);
+      let offset = 0;
+      const limit = 200;
+      let total = 0;
+
+      allVerses = [];
+
+      do {
+        const url = `https://rest.api.bible/v1/bibles/${bibleId}/search?query=${topic}&offset=${offset}&limit=${limit}`;
+        const urlBibleId = `https://rest.api.bible/v1/bibles`;
+
+        const response = await fetch(url, {
+          headers: {
+            "api-key": apiKey,
+          },
+        });
+
+        const data = await response.json();
+
+        allVerses = allVerses.concat(data.data.verses);
+        total = data.data.total;
+        offset += limit;
+      } while (allVerses.length < total);
+    }
+
+    ////////////////////////////// GETTING RANDOM VERSE ///////////////////////////////////////
+
+    async function getRandomVerse() {
+      const randomNumber = Math.floor(Math.random() * allVerses.length);
+      verse.textContent = allVerses[randomNumber].text;
+      ref.textContent = allVerses[randomNumber].reference;
+    }
+
+    async function run() {
+      await fetchAllVerses(topic);
+      getRandomVerse();
+    }
+
+    run();
+
+    //     console.log(data.data.verses.length);
+    //     verse.textContent = data.data.verses[randomNumber].text;
+    //     ref.textContent = data.data.verses[randomNumber].reference;
+    //   }
+
     // }
-    // getScriptureAPI();
 
-    // GETTING SCRIPTURES ON PAGE
+    ////////////////////////////// WORKING BUT ONLY 200 AND NOT GOOD CODE ///////////////////////////////////////
 
     const verse = document.getElementById("scripture-verse");
     const ref = document.getElementById("scripture-ref");
 
-    function getScripture(topic) {
-      // API LOGIC
+    // function getScripture(topic) {
+    //   // API LOGIC
 
-      async function getScriptureAPI() {
-        const apiKey = "RtBn4DEljTrIU0VBsqsx-";
+    //   async function getScriptureAPI() {
+    //     const apiKey = "RtBn4DEljTrIU0VBsqsx-";
 
-        const response = await fetch(
-          `https://rest.api.bible/v1/bibles/06125adad2d5898a-01/search?query=${topic}&limit=500`,
-          {
-            headers: {
-              "api-key": apiKey,
-            },
-          }
-        );
+    //     const response = await fetch(
+    //       `https://rest.api.bible/v1/bibles/65eec8e0b60e656b-01/search?query=${topic}&limit=500`,
+    //       {
+    //         headers: {
+    //           "api-key": apiKey,
+    //         },
+    //       }
+    //     );
 
-        const data = await response.json();
-        console.log(data);
-        console.log(data.data.verses[0].text);
+    //     const data = await response.json();
+    //     console.log(data);
+    //     console.log(data.data.verses[0].text);
 
-        const randomNumber = Math.floor(
-          Math.random() * data.data.verses.length
-        );
-        console.log(data.data.verses.length);
-        verse.textContent = data.data.verses[randomNumber].text;
-        ref.textContent = data.data.verses[randomNumber].reference;
-      }
-      getScriptureAPI();
-    }
+    //     const randomNumber = Math.floor(
+    //       Math.random() * data.data.verses.length
+    //     );
+    //     console.log(data.data.verses.length);
+    //     verse.textContent = data.data.verses[randomNumber].text;
+    //     ref.textContent = data.data.verses[randomNumber].reference;
+    //   }
+    //   getScriptureAPI();
+    // }
 
-    getScripture(topic);
+    // getScripture(topic);
+
+    ///////////////////////////////////////////// MORE BUTTON /////////////////////////////////////////////
 
     const btnMore = document.getElementById("btn-more");
 
     btnMore.addEventListener("click", () => {
-      getScripture(topic);
+      getRandomVerse();
     });
   }
 });
 
-//// CODE FOR HARD CODED SCRIPTURE
+///////////////////////////////////////////// HARDCODED SCRIPTURE /////////////////////////////////////////////
 
 //  function getScripture(topic) {
 //       const randomNumber = Math.floor(Math.random() * 3);
@@ -225,6 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //     getScripture(topic);
 
+///////////////////////////////////////////// API INFO /////////////////////////////////////////////
 // king james id = 'de4e12af7f28f599-02'
 // king james dblId = 'de4e12af7f28f599'
 // contemporary english versions id = '555fef9a6cb31151-01'
